@@ -69,47 +69,33 @@ class Layer:
 
 class MLP_Regression:
     def __init__(self, architecture, plot=False):
-        """
-        x_ = input data
-        y_ = targets
-        architecture is a tuple containing the parameters for every layer:
-        architecture = (layer_0 = (number_of_inputs,
-                                    activation_function_0,
-                                    derivative_activation_function_0)
-                            .
-                            .
-                            .
-                        layer_n = (number_of_units,
-                                   activation_function_n,
-                                   derivative_activation_function_n)
-        plot is a boolean (True for plotting the results during training)
-        """
-        self.plot = plot
-        self.n_layers = len(architecture) #the length of the tuple corresponds to the number of layers
-        self.layers_size = [layer.num_units for layer in architecture] #number of neurons per layer (excluding biases)
-        self.activation_functions = [layer.activation() for layer in architecture] #activation functions per layer
-        self.fprimes = [layer.activation(prime=True) for layer in architecture] #derivative of each activation function
-        self.build_net() #build the architecture described in architecture
+        """A multi-layer perceptron line by line. Only for instructional purposes.
 
-    def build_net(self):
-        ### We create lists to store the matrices needed by the chosen architecture
-        self.inputs = [] #list of inputs (it contains the input to each layer of the network)
-        self.outputs = [] #list of outputs (idem)
-        self.W = [] #list of weight matrices (per layer)
-        self.b_ = [] #list of bias vectors (per layer)
-        self.errors = [] #list of error vectors (per layer)
+        Args:
+            architecture (list): a list of instances of Layer
+            plot (bool, optional): If True results are rendered during training. Defaults to False.
+        """
+        self.architecture = architecture
+        self.n_layers = len(architecture) #the length of the tuple corresponds to the number of layers
+        self.plot = plot
+        self.initialize_weights()
+
+    def initialize_weights(self):
+        self.inputs, self.outputs = [], []
+        self.W, self.b_ = [], []
+        self.errors = []
 
         ### Initialise weights and biases
         for layer in range(self.n_layers - 1):
-            n = self.layers_size[layer]
-            m = self.layers_size[layer + 1]
+            n = self.architecture[layer].num_units
+            m = self.architecture[layer + 1].num_units
             self.W.append(torch.normal(0, 1, (m, n)))
             self.b_.append(torch.zeros((m, 1)))
             self.inputs.append(torch.zeros((n, 1)))
             self.outputs.append(torch.zeros((n, 1)))
             self.errors.append(torch.zeros((n, 1)))
 
-        n = self.layers_size[-1]
+        n = self.architecture[-1].num_units
         self.inputs.append(torch.zeros((n, 1)))
         self.outputs.append(torch.zeros((n, 1)))
         self.errors.append(torch.zeros((n, 1)))
@@ -124,7 +110,7 @@ class MLP_Regression:
 
         for i in range(1, self.n_layers):
             self.inputs[i] = self.W[i - 1] @ self.outputs[i - 1] + self.b_[i - 1]
-            self.outputs[i] = self.activation_functions[i](self.inputs[i])
+            self.outputs[i] = self.architecture[i].activation()(self.inputs[i])
 
         return self.outputs[-1]
     
@@ -134,11 +120,11 @@ class MLP_Regression:
 
     def backprop(self, loss_value):
         #Weight matrices and biases are updated based on a single input x and its target y
-        self.errors[-1] = self.fprimes[-1](self.outputs[-1]) * loss_value
+        self.errors[-1] = self.architecture[-1].activation(prime=True)(self.outputs[-1]) * loss_value
         n = self.n_layers - 2
         #Again, we will treat the last layer separately
         for i in range(n, 0, -1):
-            self.errors[i] = self.fprimes[i](self.inputs[i]) * self.W[i].T @ self.errors[i + 1]
+            self.errors[i] = self.architecture[i].activation(prime=True)(self.inputs[i]) * self.W[i].T @ self.errors[i + 1]
             self.W[i] = self.W[i] - self.learning_rate * self.outer(self.errors[i + 1],self.outputs[i])
             self.b_[i] = self.b_[i] - self.learning_rate * self.errors[i + 1]
 
@@ -188,7 +174,7 @@ class MLP_Regression:
 
     def predict(self, xs):
         n = len(xs)
-        m = self.layers_size[-1]
+        m = self.architecture[-1].num_units
         ret = torch.ones((n,m))
 
         for i in range(len(xs)):
