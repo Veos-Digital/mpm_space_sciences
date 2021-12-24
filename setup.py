@@ -1,5 +1,5 @@
-# This file is part of YOUR PROJECT NAME
-# Copyright (C) CURRENT YEAR - Veos Digital
+# This file is part of mpm
+# Copyright (C) 2021 - Veos Digital
 #
 
 import os
@@ -16,7 +16,7 @@ if CURRENT_PYTHON_VERSION < MIN_REQUIRED_PYTHON_VERSION:
 ==========================
 Unsupported Python version
 ==========================
-This version of YOUR PROJECT NAME requires Python {}.{}, but you're trying to
+This version of mpm requires Python {}.{}, but you're trying to
 install it on Python {}.{}.
 """.format(*(MIN_REQUIRED_PYTHON_VERSION + CURRENT_PYTHON_VERSION)))
     sys.exit(1)
@@ -25,7 +25,7 @@ requirements = (pathlib.Path(__file__).parent / "requirements.txt").read_text().
 EXCLUDE_FROM_PACKAGES = []
 
 setup(
-    name='YOUR PROJECT NAME',
+    name='mpm',
     version='0.0.0-prealpha',
     python_requires='>={}.{}'.format(*MIN_REQUIRED_PYTHON_VERSION),
     url='',

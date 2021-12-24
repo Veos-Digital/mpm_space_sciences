@@ -2,58 +2,14 @@
 Based on
 https://triangleinequality.wordpress.com/2014/03/31/neural-networks-part-2/
 """
-import numpy as np
 import torch
+from dataclasses import dataclass
+from mpm.activation_functions import ACTIVATION_DICT
 import matplotlib.pyplot as plt
 import seaborn as sns
-from dataclasses import dataclass
 sns.set_style("whitegrid")
 sns.set_palette("colorblind")
 
-
-#activation functions
-def sigmoid(x):
-    return 1 / (1 + torch.exp(-x))
-
-
-def sigmoid_prime(x):
-    ex = torch.exp(-x)
-    return ex / (1 + ex)**2
-
-
-def identity(x):
-    return x
-
-
-def identity_prime(x):
-    return 1
-
-
-def tanh(x):
-    raise ValueError('Please, implement me!')
-
-
-def tanh_prime(y):
-    raise ValueError('Please, implement me!')
-
-
-def relu(x):
-    raise ValueError('Please, implement me!')
-
-
-def relu_prime(y):
-    raise ValueError('Please, implement me!')
-
-
-def sub(target, prediction):
-    return prediction - target
-
-
-ACTIVATION_DICT = {
-    "sigmoid": {"func": sigmoid, "func_prime": sigmoid_prime},
-    "relu": {"func": relu, "func_prime": relu_prime},
-    "identity": {"func": identity, "func_prime": identity_prime}
-}
 
 @dataclass
 class Layer:
@@ -73,10 +29,11 @@ class MLP_Regression:
 
         Args:
             architecture (list): a list of instances of Layer
-            plot (bool, optional): If True results are rendered during training. Defaults to False.
+            plot (bool, optional): If True results are rendered during training.
+                                   Defaults to False.
         """
         self.architecture = architecture
-        self.n_layers = len(architecture) #the length of the tuple corresponds to the number of layers
+        self.n_layers = len(architecture)
         self.plot = plot
         self.initialize_weights()
 
@@ -100,7 +57,7 @@ class MLP_Regression:
         self.outputs.append(torch.zeros((n, 1)))
         self.errors.append(torch.zeros((n, 1)))
 
-    def feedforward(self, x):
+    def forward(self, x):
         """
         x is propagated through the architecture
         """
@@ -118,7 +75,7 @@ class MLP_Regression:
     def outer(v1, v2):
         return torch.outer(torch.squeeze(v1,1), torch.squeeze(v2,1))
 
-    def backprop(self, loss_value):
+    def backward(self, loss_value):
         #Weight matrices and biases are updated based on a single input x and its target y
         self.errors[-1] = self.architecture[-1].activation(prime=True)(self.outputs[-1]) * loss_value
         n = self.n_layers - 2
@@ -131,9 +88,10 @@ class MLP_Regression:
         self.W[0] = self.W[0] - self.learning_rate * self.outer(self.errors[1],self.outputs[0])
         self.b_[0] = self.b_[0] - self.learning_rate * self.errors[1]
 
-    def train(self, xs, ys, n_iter, learning_rate = .1, loss=sub):
+    def train(self, xs, ys, n_iter, learning_rate = .1, loss=None):
         #Updates the weights after comparing each input in X with y
         #repeats this process n_iter times.
+        assert loss is not None, "Please provide a valid loss function"
         self.learning_rate = learning_rate
         n = xs.shape[0]
 
@@ -145,31 +103,31 @@ class MLP_Regression:
             
             for row in range(n):    
                 x, y = xs[row], ys[row]
-                out_x = self.feedforward(x)
+                out_x = self.forward(x)
                 if torch.isnan(out_x):
                     raise ValueError('The model diverged')
-                self.backprop(loss(y, out_x))
+                self.backward(loss(y, out_x))
                 out_xs.append(out_x)    
                 
             if self.plot and repeat % 100 == 0:
-                self.plot_fit_during_train(xs, ys, out_xs)
+                self.plot_fit_during_train(out_xs)
 
     def initialise_figure(self, xs, ys):
         plt.ion() #enable interactive plotting
         self.figure = plt.figure()
         self.ax = self.figure.add_subplot(111)
         self.gt_plot = self.ax.plot(xs, ys, label='Sine', linewidth=2)
-        self.preds_plot, = self.ax.plot(xs, torch.zeros_like(xs), label="Learning Rate: "+str(self.learning_rate))
+        self.preds_plot, = self.ax.plot(xs, torch.zeros_like(xs), 
+                                        label="Learning Rate: "+str(self.learning_rate))
         plt.legend()
-        self.epsilon = 1e-10 # matplotlib needs to pause for a little while in order to display the update of the weights
+        self.epsilon = 1e-10
 
-    def plot_fit_during_train(self, xs, ys, out_xs):
+    def plot_fit_during_train(self, out_xs):
         out_xs = torch.reshape(torch.tensor(out_xs), [-1,1])
         self.preds_plot.set_ydata(out_xs)
         self.figure.canvas.draw()
         self.figure.canvas.flush_events()
         plt.pause(self.epsilon)
-        # plt.show(False)
         plt.draw()
 
     def predict(self, xs):
@@ -178,32 +136,26 @@ class MLP_Regression:
         ret = torch.ones((n,m))
 
         for i in range(len(xs)):
-            ret[i,:] = self.feedforward(xs[i])
+            ret[i,:] = self.forward(xs[i])
 
         return ret
 
-def test_regression(plots=True):
-    pass
-    #Create data
+def sub(target, prediction):
+    return prediction - target
 
 
 if __name__ == "__main__":
-    # test_regression()
     n = 20
     xs = torch.linspace(0, 3 * torch.pi, steps=n)
     xs = torch.unsqueeze(xs, 1)
     ys = torch.sin(xs) + 1
     n_iter = 3000
-    #set the architecture
-    param = (Layer(1, None),
-             Layer(20, "sigmoid"),
-             Layer(1, "identity"))
-    #Set learning rate.
+    architecture = (Layer(1, None),
+                    Layer(20, "sigmoid"),
+                    Layer(1, "identity"))
     lrs = [0.3]
-    # predictions = []
+    
     for learning_rate in lrs:
-        model = MLP_Regression(param, plot=True)
-        model.train(xs, ys, n_iter, learning_rate = learning_rate)
-        # pred = model.predict(X)
-        # print('pred = ', pred)
-        # predictions.append([learning_rate, pred])
+        model = MLP_Regression(architecture, plot=True)
+        model.train(xs, ys, n_iter, learning_rate = learning_rate, loss=sub)
+    
