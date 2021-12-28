@@ -13,4 +13,6 @@
 
 **Practice.**
 
-1. Implement a convolutional and a recurrent model, and test them on the [exoplanet dataset](../../data/exoplanet). For loading the dataset use these [helper functions](../data_management/exoplanet.py).
+1. After reading and [cnn_exo.py](../cnn_exo.py),
+2. take inspiration from that code to implement a recurrent neural network and apply it to the same task.
+3. Collect the results produced by the MLP-, CNN-, and RNN-based implementations and compare them in a table and suitable plots.

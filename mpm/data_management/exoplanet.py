@@ -35,7 +35,8 @@ def plot_time_series(X, y, label=1, num_samples=5):
 
 
 class ExoDataset(Dataset):
-    def __init__(self, path_to_data=None, is_train=True, resample=True):
+    def __init__(self, path_to_data=None, is_train=True, resample=True,
+                 add_channel=False):
         self.path_to_data = path_to_data
         self.is_train = is_train
         if is_train:
@@ -50,6 +51,8 @@ class ExoDataset(Dataset):
             self.X, self.y = self.smote_resampling(self.X, self.y)
         self.mapping = {v: i for i, v in enumerate(np.unique(self.y))}
         self.y = [self.mapping[v] for v in self.y]
+        if add_channel:
+            self.X = np.expand_dims(self.X, axis=1) # add dummy channel dimension
     
     @staticmethod
     def smote_resampling(X, y):
