@@ -13,6 +13,6 @@
 
 **Practice.**
 
-1. After reading and [cnn_exo.py](../cnn_exo.py),
+1. After reading and [cnn_exo.py](./cnn_exo.py),
 2. take inspiration from that code to implement a recurrent neural network and apply it to the same task.
-3. Collect the results produced by the MLP-, CNN-, and RNN-based implementations and compare them in a table and suitable plots. See [comparison.md](../comparison.md) for a template.
+3. Collect the results produced by the MLP-, CNN-, and RNN-based implementations and compare them in a table and suitable plots. See [comparison.md](./comparison.md) for a template.
