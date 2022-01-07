@@ -4,7 +4,7 @@ https://triangleinequality.wordpress.com/2014/03/31/neural-networks-part-2/
 """
 import torch
 from dataclasses import dataclass
-from mpm.activation_functions import ACTIVATION_DICT
+from mpm.module_1.activation_functions import ACTIVATION_DICT
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set_style("whitegrid")
@@ -106,7 +106,8 @@ class MLP_Regression:
                 out_x = self.forward(x)
                 if torch.isnan(out_x):
                     raise ValueError('The model diverged')
-                self.backward(loss(y, out_x))
+                
+                self.backward(loss(y, out_x, prime=True))
                 out_xs.append(out_x)    
                 
             if self.plot and repeat % 100 == 0:
@@ -140,7 +141,11 @@ class MLP_Regression:
 
         return ret
 
-def sub(target, prediction):
+
+   
+def se(target, prediction, prime=False):
+    if not prime:
+        return (prediction - target)**2
     return prediction - target
 
 
@@ -149,13 +154,14 @@ if __name__ == "__main__":
     xs = torch.linspace(0, 3 * torch.pi, steps=n)
     xs = torch.unsqueeze(xs, 1)
     ys = torch.sin(xs) + 1
-    n_iter = 3000
+    n_iter = 10000
     architecture = (Layer(1, None),
-                    Layer(20, "sigmoid"),
+                    Layer(n, "sigmoid"),
                     Layer(1, "identity"))
-    lrs = [0.3]
+    lrs = [0.03]
+    loss = se
     
     for learning_rate in lrs:
         model = MLP_Regression(architecture, plot=True)
-        model.train(xs, ys, n_iter, learning_rate = learning_rate, loss=sub)
+        model.train(xs, ys, n_iter, learning_rate = learning_rate, loss=loss)
     
