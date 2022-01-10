@@ -459,7 +459,7 @@ count: false
 
 --
 
-Unfortunately, computing $\frac{\partial L}{\partial p}$ requires averaging over the whole dataset, which can be very expensive.
+Unfortunately, computing $\frac{\partial \mathcal{L}}{\partial p}$ requires averaging over the whole dataset, which can be very expensive.
 
 A more practical approach (batched optimization) is to the following.
 
