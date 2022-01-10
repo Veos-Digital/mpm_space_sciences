@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 350 250" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <rect width="350" height="250" style="fill: rgb(46, 46, 46); pointer-events: none;">
+    <title>background</title>
+  </rect>
+  <g transform="matrix(1, 0, 0, 1, 2.912215, 1.649438)">
+    <circle style="fill: rgb(255, 255, 255);" cx="51.199" cy="200.935" r="35.073"/>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; font-style: italic; white-space: pre;" transform="matrix(0.947567, 0, 0, 0.947567, -33.549084, -20.07045)" bx:origin="0.5 0.622"><tspan x="79.523" y="242.029">x₁</tspan><tspan x="79.523" dy="1em">​</tspan></text>
+  </g>
+  <text style="fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-style: italic; white-space: pre;" transform="matrix(0.947567, 0, 0, 0.947567, 2.870425, -112.352798)" bx:origin="0.5 0.622"><tspan x="79.523" y="242.029">w₁</tspan><tspan x="79.523" dy="1em">​</tspan></text>
+  <text style="fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-style: italic; white-space: pre;" transform="matrix(0.947567, 0, 0, 0.947567, 65.390511, -111.835808)" bx:origin="0.5 0.622"><tspan x="79.523" y="242.029">wₙ</tspan><tspan x="79.523" dy="1em">​</tspan></text>
+  <g transform="matrix(1, 0, 0, 1, 2.912215, 1.649431)">
+    <circle style="fill: rgb(255, 255, 255);" cx="170.953" cy="199.835" r="35.073"/>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; font-style: italic; white-space: pre;" transform="matrix(0.947567, 0, 0, 0.947567, 85.960938, -21.170128)"><tspan x="79.523" y="242.029">xₙ</tspan><tspan x="79.523" dy="1em">​</tspan></text>
+  </g>
+  <text style="fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-style: italic; white-space: pre;" transform="matrix(0.947567, 0, 0, 0.947567, 170.073242, -112.094307)" bx:origin="0.5 0.622"><tspan x="79.523" y="242.029">b</tspan><tspan x="79.523" dy="1em">​</tspan></text>
+  <g transform="matrix(0.947567, 0, 0, 0.947567, 6.529739, -36.813126)">
+    <circle style="fill: rgb(255, 255, 255);" cx="302.976" cy="252.064" r="37.014"/>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" x="296.075" y="260.856">1</text>
+  </g>
+  <g transform="matrix(0.947567, 0, 0, 0.947567, -1.485605, -34.002178)">
+    <circle style="fill: rgb(255, 255, 255);" cx="185.054" cy="85.216" r="37.014"/>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; font-style: italic; white-space: pre;" transform="matrix(1, 0, 0, 1, -9.383492, 10.958183)"><tspan x="186.778" y="83.05">ŷ</tspan><tspan x="186.778" dy="1em">​</tspan></text>
+  </g>
+  <line style="stroke: rgb(255, 254, 254); stroke-width: 2px;" x1="71.666" y1="165.22" x2="139.42" y2="76.495"/>
+  <line style="stroke: rgb(255, 254, 254); stroke-width: 2px;" x1="173.297" y1="159.843" x2="173.297" y2="94.24"/>
+  <line style="stroke: rgb(255, 254, 254); stroke-width: 2px;" x1="273.732" y1="164.605" x2="209.515" y2="78.216"/>
+  <text style="fill: rgb(255, 254, 254); font-family: Arial, sans-serif; font-size: 26.5px; white-space: pre;" transform="matrix(1, 0, 0, 1, 7.49603, 7.342418)"><tspan x="95.453" y="201.603">...</tspan><tspan x="95.453" dy="1em">​</tspan></text>
+</svg>
