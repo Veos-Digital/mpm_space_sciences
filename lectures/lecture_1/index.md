@@ -503,6 +503,43 @@ Many other batched optimizers can be used.
 
 ### From data to prediction
 
+<img src="assets/data_ops.jpg" width="100%">
+
+---
+
+### From data to prediction
+
+<img src="assets/sum_stats.jpg" width="68%">
+
+---
+
+### From data to prediction
+
+<img src="assets/data_split.jpg" width="70%">
+
+---
+
+### From data to prediction
+
+<img src="assets/normalization.jpg" width="85%">
+
+---
+
+### From data to prediction
+
+<img src="assets/extra_data_ops.jpg" width="75%">
+
+---
+
+### From data to prediction
+
+<img src="assets/metrics.jpg" width="100%">
+
+---
+
+### From data to prediction
+
+<img src="assets/model.jpg" width="100%">
 
 ---
 
