@@ -293,6 +293,71 @@ count:false
 
 ### Recurrence
 
+.container[
+  As convolutional networks were originally designed to work on images, sequential data are the natural domain of recurrent neural networks (RNNs).
+]
+
+--
+
+.container[
+- Sequential data and recurrent architectures
+
+- Backpropagation through time
+
+- Long Short Time Memory (LSTM) and Gated Recurrent Units (GRU)
+
+- Data preparation
+]
+
+---
+
+### Sequential data and recurrent architectures
+
+.container[
+  Data are sequential when their underlying temporal dynamics if more relevant than the information carried by each individual data point.
+]
+
+--
+
+.container[
+  <img style="width: 100%;" src="assets/hp_brightness.png"/>
+  <p><small>Image credits: Tommaso Buonocore</small></p>
+  
+]
+
+---
+
+### Sequential data and recurrent architectures
+
+.column-left[
+  The main idea is to add knowledge of the immediate past to the current state of the network.
+]
+
+.column-right[
+  <img style="width: 50%;" src="assets/rnn.jpg"/>
+]
+
+---
+
+### Sequential data and recurrent architectures - unfolding
+
+
+.container[
+  It is natural to unfold a recurrent architecture in time.
+
+  **Exercise.** Why is this operation relevant?
+
+  <img style="width: 100%;" src="assets/unfold.jpg"/>
+]
+
+---
+
+### Sequential data and recurrent architectures - relationships
+.container[
+  <img style="width: 100%;" src="assets/rel_rnn.jpg"/>
+]
+
+
 ---
 
 layout: false
