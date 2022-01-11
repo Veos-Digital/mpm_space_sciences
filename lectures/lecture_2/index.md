@@ -357,6 +357,63 @@ count:false
   <img style="width: 100%;" src="assets/rel_rnn.jpg"/>
 ]
 
+---
+
+### Backpropagation through time
+
+.container[
+  Let $x_t$, $h_t$, and $\hat{y}_t$ be the input, hidden state and output at time $t$, respectively.
+  Then, given hidden and output weight matrices $w_h$ and $w_y$, we have
+
+  $$
+    h\_t = f(x\_t, h\_{t-1}, w\_h)
+  $$
+  $$
+    \hat{y}\_t = g(h\_t, w\_y)
+  $$
+
+  We need to compute derivatives for the loss function:
+  
+  $$
+    \mathcal{L}(x\_1,\dots, x\_T, y\_1, \dots, y\_T, w\_h, w\_y) = \frac{1}{T}\sum_{t=1}^T l(y\_t, \hat{y}\_t)
+  $$
+]
+
+--
+
+.container[
+  $$
+  \begin{aligned}
+    \frac{\partial \mathcal{L}}{\partial w\_h}&=\frac{1}{T}\sum\_{t=1}^T\frac{\partial l(y\_t, \hat{y}\_t)}{\partial w_h} \\\\
+    &=\frac{1}{T}\sum\_t\frac{\partial l(y\_t, \hat{y}\_t)}{\partial\hat{y}\_t}\frac{\partial g(h\_t, w\_y)}{\partial h\_t}\frac{\partial h\_t}{\partial w\_h}
+  \end{aligned}
+  $$
+]
+
+---
+
+### Backpropagation through time
+
+.container[
+The term $\frac{\partial h\_t}{\partial w\_h}$ is particularly tricky to compute:
+
+$$
+\begin{aligned}
+\frac{\partial h\_t}{\partial w\_h} &= \frac{\partial f(x\_t, h\_{t-1}, w\_h)}{\partial w\_h} + \frac{\partial f(x\_t, h\_{t-1}, w\_h)}{\partial h\_{t-1}}\frac{\partial h\_{t-1}}{\partial w\_h}\\\\
+&= \frac{\partial f(x\_t, h\_{t-1}, w\_h)}{\partial w\_h} + \sum\_{i=1}^{t-1}(\prod\_{j=i+1}^t \frac{\partial f(x\_j, h\_{j-1}, w\_h)}{\partial h\_{j-1}})\frac{\partial f(x\_i, h\_{i-1}, w\_h)}{\partial w\_h}
+\end{aligned}
+$$
+]
+
+--
+
+.container[
+  This computation can be extremely complex. For this reason, it is often either deterministically or randomly truncated.
+]
+
+---
+
+### Vanishing and exploding gradients
 
 ---
 
