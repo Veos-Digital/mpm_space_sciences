@@ -177,6 +177,106 @@ $$J[i\_1, i\_2, i\_3 c\_2] = \sum\_{c\_1 \in C\_1} \sum\_{k\_1 \in K\_1} \sum\_{
 
 ---
 
+### Building a convolutional architecture
+
+.container[
+  Convolution is not the only operation typically used as building block of a convolutional architecture.
+]
+
+--
+
+.column-right.long[
+
+]
+
+.container[
+  Knowledge injection is not limited to informing the network of the dimensionality of the data points.
+  We are also interested in:
+
+  - controlling the *receptive field* of convolutions;
+  - inform the model of broader classes of invariance or equivariance (e.g., rotations);
+  - compose the convolution-based part of the architecture with other networks (e.g., dense classifier).
+]
+
+---
+
+### Building a convolutional architecture - locality
+
+
+
+.column-left[
+  **Exercise**. Can you justify the following result obtained from [Detexify](https://detexify.kirelabs.org/classify.html)?
+]
+
+.column-right[
+  <img style="width: 90%;" src="assets/locality.jpg"/>
+]
+
+---
+count:false
+
+### Building a convolutional architecture - locality
+
+.column-left[
+  The receptive field of convolutional layers can be controlled through parameters such as stride and dilation. 
+  However, it is common to downsample the layer's input via *pooling* operations
+]
+
+--
+
+.column-right.long[
+  <img style="width: 90%;" src="assets/pooling.jpeg"/>
+  <p><small>Image credits: Huo Yingge, Imran Ali and Kang-Yoon Lee</small></p>
+  
+]
+
+---
+
+### Building a convolutional architecture - invariance and equivariance
+
+.column-left[
+  Oftentimes, problems present more symmetries than translation. It is important to make the model aware of these constraints to reduce the dimensionality of the problem and thus make the learning swifter and hopefully converge to a more general solution.
+]
+
+--
+
+.column-right.long[
+    <img style="width: 90%;" src="assets/augmentation.jpeg"/>
+  <p><small>Image credits: Jamil Ahmad, Khan Muhammad and Sung Wook Baik</small></p>
+]
+
+--
+
+.column-left[
+  It is also possible to take advantage of *functional* computational topology to prime a convolutional network with equivariant filters.
+]
+
+---
+count:false
+
+### Building a convolutional architecture - invariance and equivariance
+
+.column-left[
+  Oftentimes, problems present more symmetries than translation. It is important to make the model aware of these constraints to reduce the dimensionality of the problem and thus make the learning swifter and hopefully converge to a more general solution.
+]
+
+.column-right.long[
+    <img style="width: 90%;" src="assets/equi_filters.png"/>
+  <p><small>Bergomi, Frosini, Giorgi, Quercioli (2019)</small></p>
+]
+
+.column-left[
+  It is also possible to take advantage of *functional* computational topology to prime a convolutional network with equivariant filters.
+]
+
+---
+
+### Building a convolutional architecture - composability
+
+<img style="width: 90%;" src="assets/cnn.svg"/>
+
+---
+
 ### Summary on Convolutional Neural Networks (CNNs)
 
 .container[
