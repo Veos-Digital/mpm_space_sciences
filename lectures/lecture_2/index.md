@@ -426,7 +426,7 @@ $$
 ### Long-Short Time Memory (LSTM)
 
 .column-left[
-  LSTM allow a recurrent network to retain more easily past information.
+  LSTMs allow a recurrent network to retain more easily past information.
 ]
 
 --
