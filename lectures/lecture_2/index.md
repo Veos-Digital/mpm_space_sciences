@@ -304,7 +304,7 @@ count:false
 
 - Backpropagation through time
 
-- Long Short Time Memory (LSTM) and Gated Recurrent Units (GRU)
+- Long-Short Time Memory (LSTM) and Gated Recurrent Units (GRU)
 
 - Data preparation
 ]
@@ -341,7 +341,6 @@ count:false
 
 ### Sequential data and recurrent architectures - unfolding
 
-
 .container[
   It is natural to unfold a recurrent architecture in time.
 
@@ -353,8 +352,15 @@ count:false
 ---
 
 ### Sequential data and recurrent architectures - relationships
+
 .container[
   <img style="width: 100%;" src="assets/rel_rnn.jpg"/>
+]
+
+--
+
+.container[
+  In what situations a one-to-many should be favoured over a many-to-many architecture?
 ]
 
 ---
@@ -371,7 +377,11 @@ count:false
   $$
     \hat{y}\_t = g(h\_t, w\_y)
   $$
+]
 
+--
+
+.container[
   We need to compute derivatives for the loss function:
   
   $$
@@ -408,12 +418,62 @@ $$
 --
 
 .container[
-  This computation can be extremely complex. For this reason, it is often either deterministically or randomly truncated.
+  This computation can be extremely complex. For this reason, it is often either deterministically or randomly truncated. Pathological behaviors such as vanishing and exploding gradients can be caused by the numerical instability of the computation showcased above.
 ]
 
 ---
 
-### Vanishing and exploding gradients
+### Long-Short Time Memory (LSTM)
+
+.column-left[
+  LSTM allow a recurrent network to retain more easily past information.
+]
+
+--
+
+.column-right[
+  <img style="width: 100%;" src="assets/lstm.jpg"/>
+]
+
+---
+
+### Data preparation
+
+.container[
+  <img style="width: 50%;" src="assets/rnn_data_struct.jpg"/>
+]
+
+--
+
+.container[
+  The target $y$ should be created according to the task:
+  
+  - labels could be associated to time stamps in the sequence;
+  - future frames can be forecasted $y = \\{\varphi\_{i\_{n+k}}^1,\dots,\varphi\_{i\_{n+k}}^m\\}$;
+  - multiple future points can be forecasted at the same time.
+]
+
+---
+
+### Caveats
+
+.container[
+  1. Always implement *naive* models for comparison;
+  2. Do not rely too much on visualization of long time series;
+  3. Remember that prediction does not equal generation.
+]
+
+---
+
+### Summary on Recurrent Neural Networks (RNNs)
+
+.container[
+- Sequential data require memory: past dynamics strongly influence the present.
+
+- Although it is possible to compute gradients for RNNs, it has high computational cost, and can lead to vanishing and exploding gradients.
+
+- LSTMs (and GRU) can be used to alleviate these issues.
+]
 
 ---
 
