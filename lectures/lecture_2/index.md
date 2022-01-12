@@ -458,9 +458,12 @@ $$
 ### Caveats
 
 .container[
-  1. Always implement *naive* models for comparison;
-  2. Do not rely too much on visualization of long time series;
-  3. Remember that prediction does not equal generation.
+  
+1. Always implement *naive* models for comparison;
+
+2. Do not rely too much on visualization of long time series;
+
+3. Remember that prediction does not equal generation.
 ]
 
 ---
