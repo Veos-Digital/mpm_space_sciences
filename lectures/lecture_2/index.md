@@ -25,7 +25,7 @@ layout: true
 
 - Injecting knowledge via equivariance and locality.
 
-- Parameter optimization in modern architectures.
+- Convolutional and recurrent neural networks.
 ]
 
 ---
