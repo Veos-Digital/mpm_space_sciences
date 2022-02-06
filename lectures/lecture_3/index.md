@@ -194,6 +194,327 @@ Drawback: in principle, it can be difficult to build an embedding.
 
 ---
 
+### Recap and practice
+
+.column-left[
+<img src="assets/gridworld.png" alt="this slowpoke moves"  width="90%" />
+<p><small>Credits: Andrej Karpathy - Reinforce JS</small></p>
+]
+
+--
+
+.column-right[
+  #### Dynamic programming
+
+  **Policy**: $\pi: \textnormal{States}\rightarrow\textnormal{Actions}$.
+  
+  **Reward**: $R(s,a)$.
+
+  **Value function**: $V^\pi(s)$, i.e., expected reward at $s$, according to $\pi$.
+  
+  **Action value function**: $Q(s,a)$, i.e., expected reward at $s$ by taking action $a$.
+
+  **Bellman equation**: $V^\pi(s)=\sum\_{a} \pi(a \, | \, s) Q(s, \, a)$.
+
+  **Greedy policy update** with respect to the value function: $ \pi'(s) = \arg\max_a Q(s,a)$
+  
+]
+
+---
+count:false
+
+### Recap and practice
+
+.column-left[
+<img src="assets/gridworld.gif" alt="this slowpoke moves"  width="90%" />
+<p><small>Credits: Andrej Karpathy - Reinforce JS</small></p>
+]
+
+.column-right[
+#### Dynamic programming
+
+  **Policy**: $\pi: \textnormal{States}\rightarrow\textnormal{Actions}$.
+  
+  **Reward**: $R(s,a)$.
+
+  **Value function**: $V^\pi(s)$, i.e., expected reward at $s$, according to $\pi$.
+  
+  **Action value function**: $Q(s,a)$, i.e., expected reward at $s$ by taking action $a$.
+
+  **Bellman equation**: $V^\pi(s)=\sum\_{a} \pi(a \, | \, s) Q(s, \, a)$.
+
+  **Greedy policy update** with respect to the value function: $ \pi'(s) = \arg\max_a Q(s,a)$
+]
+
+---
+
+count:false
+
+### Recap and practice
+
+.column-left[
+<img src="assets/gridworld.png" alt="this slowpoke moves"  width="90%" />
+<p><small>Credits: Andrej Karpathy - Reinforce JS</small></p>
+]
+
+.column-right[
+#### Dynamic programming
+
+Is this approach usable in real-world context?
+]
+
+---
+
+### Recap and practice
+
+.column-left[
+<img src="assets/td_learning.png" alt="this slowpoke moves"  width="80%" />
+<p><small>Credits: Andrej Karpathy - Reinforce JS</small></p>
+]
+
+.column-right[
+  #### Temporal difference learning
+
+  **Idea** Estimate $Q^\pi(s,a)$. The Bellman equation acts as a loss function. We update the policy to act greedily with respect to the new estimate.
+
+  **On-policy update** (SARSA)
+  $$\textnormal{TD-Error} = \underbrace{r\_t + \gamma Q(s\_{t+1}, a\_{t+1})}\_{target} - \underbrace{Q(s\_t, a\_t)}_{current}$$
+  $$ Q(s\_t, a\_t) \leftarrow Q(s\_t, a\_t) + \alpha  \textnormal{TD-Error}$$
+
+  **Off-policy update** (Q-learning)
+  $$\textnormal{TD-Error} = r\_t + \gamma \max\_a Q(s\_{t+1}, a) - Q(s\_t, a\_t)$$
+  $$ Q(s\_t, a\_t) \leftarrow Q(s\_t, a\_t) + \alpha  \textnormal{TD-Error}$$
+
+  **Exploration**
+]
+
+---
+count:false
+
+### Recap and practice
+
+.column-left[
+<img src="assets/td_learning.gif" alt="this slowpoke moves"  width="80%" />
+<p><small>Credits: Andrej Karpathy - Reinforce JS</small></p>
+]
+
+.column-right[
+  #### Temporal difference learning
+
+  **Idea** Estimate $Q^\pi(s,a)$. The Bellman equation acts as a loss function. We update the policy to act greedily with respect to the new estimate.
+
+  **On-policy update** (SARSA)
+  $$\textnormal{TD-Error} = \underbrace{r\_t + \gamma Q(s\_{t+1}, a\_{t+1})}\_{target} - \underbrace{Q(s\_t, a\_t)}_{current}$$
+  $$ Q(s\_t, a\_t) \leftarrow Q(s\_t, a\_t) + \alpha  \textnormal{TD-Error}$$
+
+  **Off-policy update** (Q-learning)
+  $$\textnormal{TD-Error} = r\_t + \gamma \max\_a Q(s\_{t+1}, a) - Q(s\_t, a\_t)$$
+  $$ Q(s\_t, a\_t) \leftarrow Q(s\_t, a\_t) + \alpha  \textnormal{TD-Error}$$
+
+  **Exploration**
+]
+
+---
+
+### Deep Q Learning
+
+
+.column-left[
+  How can we extend the TD (Q-learning) approach to a continuous state space?
+]
+
+.column-right.long[
+
+]
+
+--
+
+.column-left[
+  In the example before, we thought about $Q(s,a)$ as a table.
+]
+
+--
+
+.column-left[
+  We can now use a function approximator to compute $Q(s,a)$ as a parametric function $f_{\vartheta}(s,a)$.
+]
+
+--
+
+.column-left[
+  **Exercise**. What is the difference between deep Q learning and standard deep-learning problems?
+]
+
+---
+
+### Deep Q Learning - strategy
+
+**Exercise**. What strategy is better?
+
+<img src="assets/dql.png" alt="this slowpoke moves"  width="50%" />
+
+
+---
+
+### Deep Q Learning - Example
+
+.column-left[
+<img src="assets/waterworld.png" alt="this slowpoke moves"  width="80%" />
+<p><small>Credits: Andrej Karpathy - Reinforce JS</small></p>
+]
+
+---
+count:false
+
+### Deep Q Learning - Example
+
+.column-left[
+<img src="assets/waterworld.gif" alt="this slowpoke moves"  width="80%" />
+<p><small>Credits: Andrej Karpathy - Reinforce JS</small></p>
+]
+
+---
+
+### Deep Q Learning - Implementation
+
+.column-left[
+
+1. Collect a transition tuple $(s\_t, a\_t, r\_t, s\_{t+1})$.
+
+2. Forward $s\_{t+1}$ to evaluate the (fixed) target $y = \max\_a f\_{\vartheta}(s\_{t+1})$. This quantity is interpreted to be $\max\_a Q(s\_{t+1})$.
+
+3. Forward $f_{\theta}(s_t)$ and compute a regression loss on the dimension $a_t$ of the output, to be $y$.
+
+4. Backpropagate the gradient and perform a parameter update.
+]
+---
+cout:false
+
+### Deep Q Learning - Implementation
+
+<img src="assets/dql_flux.png" alt="this slowpoke moves"  width="90%" />
+
+
+---
+
+### Deep Q Learning - Implementation
+
+#### Replay memory
+
+.column-left[
+At each time $t$, the agent and environment produce a tuple $(s\_t, a\_t, r\_t, s\_{t+1})$.
+
+We collect all these tuples and build a training set that can be sampled.
+]
+
+.column-right.long[
+
+]
+
+--
+
+.column-left[
+  **Exercise**. Why is this useful?
+]
+
+---
+
+### Deep Q learning - Pseudocode
+
+#### Useful packages
+
+.column-left[
+- Torch
+- OpenAI Gym
+]
+
+.column-right[
+  <img src="assets/openai.png" alt="this slowpoke moves"  width="100%" />
+]
+
+---
+
+### Deep Q learning - Pseudocode
+
+.column-left[
+#### Initialization
+
+```python
+env = gym.make('CartPole-v0')
+
+Transition = namedtuple('Transition',
+                        ('state', 'action', 
+                        'next_state', 
+                        'reward'))
+```
+]
+
+.column-right[
+#### Replay Memory
+
+```python
+class ReplayMemory(object):
+
+  def __init__(self, capacity):
+    self.memory = []
+    self.capacity = capacity
+
+  def push(self, *args):
+    """Save a transition"""
+    self.memory.append(Transition(*args))
+    if len(self.memory) > capacity:
+      self.memory = self.memory[-self.capacity:]
+
+  def sample(self, batch_size):
+    return random.sample(self.memory,
+                         batch_size)
+
+  def __len__(self):
+    return len(self.memory)
+```
+]
+
+---
+
+### Deep Q learning - Pseudocode
+
+.column-left[
+  
+  #### Q Network
+
+  A neural network such as the ones we implemented in the previous modules.
+  It should have as many outputs as the number of the possible actions.
+
+]
+
+.column-right[
+#### Replay Memory
+
+```python
+class ReplayMemory(object):
+
+  def __init__(self, capacity):
+    self.memory = []
+    self.capacity = capacity
+
+  def push(self, *args):
+    """Save a transition"""
+    self.memory.append(Transition(*args))
+    if len(self.memory) > capacity:
+      self.memory = self.memory[-self.capacity:]
+
+  def sample(self, batch_size):
+    return random.sample(self.memory,
+                         batch_size)
+
+  def __len__(self):
+    return len(self.memory)
+```
+
+]
+
+---
+
 layout: false
 class: center
 
