@@ -488,29 +488,23 @@ class ReplayMemory(object):
 ]
 
 .column-right[
-#### Replay Memory
+  #### Target Network
 
-```python
-class ReplayMemory(object):
+  A copy of the Q network that will be updated each $N$ steps.
 
-  def __init__(self, capacity):
-    self.memory = []
-    self.capacity = capacity
+]
 
-  def push(self, *args):
-    """Save a transition"""
-    self.memory.append(Transition(*args))
-    if len(self.memory) > capacity:
-      self.memory = self.memory[-self.capacity:]
+--
 
-  def sample(self, batch_size):
-    return random.sample(self.memory,
-                         batch_size)
+.column-left[
+  #### Hyperparameters
 
-  def __len__(self):
-    return len(self.memory)
-```
-
+  ```python
+  batch_size = 128
+  gamma = 0.999
+  eps_s, eps_e, decay = 0.9, 0.01, 175
+  target_update = 5
+  ```
 ]
 
 ---
