@@ -509,6 +509,18 @@ class ReplayMemory(object):
 
 ---
 
+### References
+
+- Reinforcement Learning, Sutton & Barto, [link](https://mitpress.mit.edu/books/reinforcement-learning-second-edition)
+
+- Human-level control through deep reinforcement learning, Mnih et al., [link](https://www.nature.com/articles/nature14236?wm=book_wap_0005)
+
+- Reinforcement Learning with Unsupervised Auxiliary Tasks, Jaderberg et al., [link](https://arxiv.org/abs/1611.05397)
+
+- Asynchronous Methods for Deep Reinforcement Learning, Mnih et al., [link](http://proceedings.mlr.press/v48/mniha16.html)
+
+---
+
 layout: false
 class: center
 
