@@ -166,11 +166,11 @@ $$
 There are broadly three classes of methods to compute the value function.
 
 .container[
-**Model free.** Do not attempt to learn the structure of the task, and simply update the $Q$ function while performing the task, using some learning rate $\rho$:
+**Model free.** Do not attempt to learn the structure of the task, and simply update the $Q$ function while performing the task, using some learning rate $\alpha$:
 $$
 \begin{aligned}
 &\Delta = R + \gamma V(s') - Q(s, a)\\\\
-&Q(s, a) \mathrel{+}= \rho \Delta.
+&Q(s, a) \mathrel{+}= \alpha \Delta.
 \end{aligned}
 $$
 Drawback: hard to adjust to changes in the task.
@@ -179,7 +179,7 @@ Drawback: hard to adjust to changes in the task.
 --
 
 .container[
-**Model base.** Learn all transition probabilities $p(s' \, | \, s, \, a)$ and use the information to plan ahead (think: game of chess).
+**Model based.** Learn all transition probabilities $p(s' \, | \, s, \, a)$ and use the information to plan ahead (think: game of chess).
 
 Drawback: unfeasible for large state spaces.
 ]
