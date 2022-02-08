@@ -69,11 +69,11 @@ Its origins are rooted in behavioral psychology, where rewards can be used to re
 
 ### Problem description
 
-- Set of states $s_1, \dots, s_n$ describing the current *situation* of the agent.
+- Set of states $s_1, \dots, s_n$ (the current *situation* of the agent).
 
 --
 
-- Set of actions $a_1, \dots, a_m$ describing all possible actions the agent can take.
+- Set of actions $a_1, \dots, a_m$ that the agent can take.
 
 --
 
@@ -93,7 +93,7 @@ Its origins are rooted in behavioral psychology, where rewards can be used to re
 
 .container[
 The objective of the agent is to develop a policy $\pi(a \, | \, s)$:<br>
-the probability of choosing a given action $a_k$ when in state $s_i$.
+the probability of choosing a given action $a$ when in state $s$.
 
 For a given policy, there is a notion of *discounted future rewards*:
 
