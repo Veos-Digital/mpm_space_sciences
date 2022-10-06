@@ -37,7 +37,7 @@ In the previous lecture, we developed the following plan.
 
 - Choose a differentiable parametric function $\hat y = f(x, p)$, where $x$ is the input and $p$ the parameters.
 
-- Define a differentiable loss function $\mathcal{L}(\hat y)$ and minimize it with respect to $p$ (using its derivatives).
+- Define a differentiable loss function $\mathcal{L}(\hat y)$ to be minimized (with respect to $p$).
 
 - Compute derivatives of $\mathcal{L}$ with respect to $p$ and use them to find optimal parameters. 
 ]
@@ -60,7 +60,7 @@ In the previous lecture, we developed the following plan.
 
 - Choose a differentiable parametric function $\hat y = f(x, p)$, where $x$ is the input and $p$ the parameters.
 
-- Define a differentiable loss function $\mathcal{L}(\hat y)$ and minimize it with respect to $p$ (using its derivatives).
+- Define a differentiable loss function $\mathcal{L}(\hat y)$ to be minimized (with respect to $p$).
 
 - Compute derivatives of $\mathcal{L}$ with respect to $p$ and use them to find optimal parameters. 
 ]
